@@ -1,4 +1,5 @@
 import { UserProvider } from '@auth0/nextjs-auth0/client';
+import Nav from './nav';
 
 export const metadata = {
   title: 'Next.js',
@@ -13,7 +14,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <UserProvider>
-        <body>{children}</body>
+        <body>
+          <Nav />
+          {children}
+        </body>
       </UserProvider>
     </html>
   )

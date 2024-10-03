@@ -7,7 +7,6 @@ const page = () => {
     <div>
       The dashboard
       <a href="/api/auth/logout">Logout</a>
-
     </div>
   )
 }

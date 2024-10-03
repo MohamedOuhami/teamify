@@ -21,6 +21,6 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "app/authentication/signup.js", "app/api/storeEntities/storeUser/route.js", "pages/api/auth/store_user.js", "pages/api/storage/storeUsers.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "app/authentication/signup.js", "app/api/storeEntities/storeUser/route.js", "pages/api/auth/store_user.js", "pages/api/storage/storeUsers.js", "app/api/auth/[...nextauth]/options.js"],
   "exclude": ["node_modules"]
 }

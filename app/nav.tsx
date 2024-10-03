@@ -1,7 +1,10 @@
-import Link from 'next/link'
-import React from 'react'
+"use client"
+import { signIn, signOut, useSession } from 'next-auth/react'
+import Link from 'next/link';
 
 const Nav = () => {
+    const { data: session } = useSession();
+
     return (
         <nav className="flex flex-row justify-between">
             <div className='appTitle'>Teamify</div>
@@ -10,11 +13,18 @@ const Nav = () => {
                 <Link className='mx-2' href='/blog'>Blog</Link>
                 <Link className='mx-2' href='/Docs'>Docs</Link>
 
-                <Link className='mx-2' href='/api/auth/signup'>Sign in</Link>
-                <Link className='mx-2' href='/api/auth/login'>Start for free</Link>                
+                {!session ? (
+                    <>
+                        <button className='mx-2' onClick={() => signIn()}>Sign in</button>
+                        <button className='mx-2' onClick={() => signIn()}>Start for free</button>
+                    </>
+                ) : (
+                    <button className='mx-2' onClick={() => signOut()}>Sign out</button>
+                )}
             </nav>
         </nav>
     )
 }
+
 
 export default Nav

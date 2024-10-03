@@ -7,6 +7,9 @@ export default function Home() {
   const { status } = useSession();
   const router = useRouter();
 
+  console.log(status);
+  
+
   const showSession = () => {
     if (status === "authenticated") {
       return (

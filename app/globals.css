@@ -1,3 +1,63 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+html, body {
+    height: 100%; /* Ensure body takes full height */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column; /* Ensure a natural flow for elements like the navbar */
+}
+
+body {
+    background: linear-gradient(to right, #0d1b2a 40%, #1b263b 60%) no-repeat;
+    background-size: cover;
+    min-height: 100vh; /* Ensure body covers the full viewport height */
+}
+
+.curve-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* Ensure the background stays behind the content */
+    overflow: hidden;
+}
+
+.curve-background::before {
+    content: "";
+    position: absolute;
+    top: 5%; /* Positioning for the top right bubble */
+    right: 5%; 
+    width: 150px; /* Width of the bubble */
+    height: 150px; /* Height of the bubble */
+    background-color: rgba(255, 255, 255, 0.6); /* Transparent white for subtle effect */
+    border-radius: 50%; /* Make it a perfect circle */
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.5); /* Soft shadow for bubble effect */
+}
+
+.curve-background::after {
+    content: "";
+    position: absolute;
+    bottom: 5%; /* Positioning for the bottom left bubble */
+    left: 5%;
+    width: 120px; /* Another bubble, slightly smaller */
+    height: 120px;
+    background-color: rgba(255, 255, 255, 0.4); /* Another transparent white bubble */
+    border-radius: 50%; /* Make it a perfect circle */
+    box-shadow: 0 0 15px rgba(255, 255, 0.5); /* Soft shadow for bubble effect */
+}
+
+/* Ensure the navbar and other elements retain their proper styling */
+.navbar {
+    z-index: 1; /* Keep the navbar in front of the background */
+    position: relative;
+    width: 100%;
+}
+
+/* Ensure that any container also stretches to fill the full height */
+.container {
+    flex: 1; /* Allow the container to grow and fill the available space */
+}

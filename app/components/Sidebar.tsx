@@ -13,7 +13,8 @@ import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import Link from 'next/link';
-import { useSession } from 'next-auth/react';
+import { signOut, useSession } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 
 export default function TemporaryDrawer() {
     const [open, setOpen] = React.useState(false);
@@ -23,6 +24,8 @@ export default function TemporaryDrawer() {
     };
 
     const { status, data } = useSession()
+
+    const router = useRouter()
 
     const DrawerList = (
 
@@ -39,7 +42,7 @@ export default function TemporaryDrawer() {
                     </ListItemButton>
                 </ListItem>
 
-                <ListItem key={'teams'} disablePadding>
+                <ListItem key={'teams_sidebar'} disablePadding>
                     <Link href="/teams" style={{ width: '100%', display: 'block' }}>
                         <ListItemButton sx={{ width: '100%' }}>
                             <ListItemText primary={'Teams'} />
@@ -48,7 +51,7 @@ export default function TemporaryDrawer() {
                 </ListItem>
 
                 {/* For the tasks */}
-                <ListItem key={'tasks'} disablePadding>
+                <ListItem key={'tasks_sidebar'} disablePadding>
                     <Link href="/tasks" style={{ width: '100%', display: 'block' }}>
                         <ListItemButton sx={{ width: '100%' }}>
                             <ListItemText primary={'Tasks'} />
@@ -57,7 +60,7 @@ export default function TemporaryDrawer() {
                 </ListItem>
 
                 {/* For the messages */}
-                <ListItem key={'messages'} disablePadding>
+                <ListItem key={'messages_sidebar'} disablePadding>
                     <Link href="/messages" style={{ width: '100%', display: 'block' }}>
                         <ListItemButton sx={{ width: '100%' }}>
                             <ListItemText primary={'Messages'} />
@@ -67,10 +70,27 @@ export default function TemporaryDrawer() {
 
 
                 {/* For the messages */}
-                <ListItem key={'settings'} disablePadding>
+                <ListItem key={'settings_sidebar'} disablePadding>
                     <Link href="/settings" style={{ width: '100%', display: 'block' }}>
                         <ListItemButton sx={{ width: '100%' }}>
                             <ListItemText primary={'Settings'} />
+                        </ListItemButton>
+                    </Link>
+                </ListItem>
+
+                <ListItem key={'signOut_sidebar'} disablePadding>
+                    <Link
+                        href="/" // Redirect to the homepage or wherever you want after sign out
+                        style={{ width: '100%', display: 'block' }}
+                        onClick={(e) => {
+                            e.preventDefault(); // Prevent default link behavior
+                            signOut({ redirect: false }).then(() => {
+                                router.push("/"); // Redirect after signing out
+                            });
+                        }}
+                    >
+                        <ListItemButton sx={{ width: '100%' }}>
+                            <ListItemText primary={'Sign Out'} />
                         </ListItemButton>
                     </Link>
                 </ListItem>

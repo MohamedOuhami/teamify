@@ -3,26 +3,37 @@ import { FormEvent, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { register } from "@/app/actions/auth/register";
+import { useSession } from "next-auth/react";
+import { createTeam } from "@/app/actions/teams/createTeam";
 
 
-export default function Register() {
+export default function CreateTeam() {
     const [error, setError] = useState<string>();
     const router = useRouter();
     const ref = useRef<HTMLFormElement>(null);
+    const {data} = useSession()
 
     const handleSubmit = async (formData: FormData) => {
-        const r = await register({
-            email: formData.get("email"),
-            password: formData.get("password"),
-            name: formData.get("name")
+
+        formData.set('leader_email', data?.user?.email || '');
+
+        console.log(formData);
+
+        const r = await createTeam({
+            name: formData.get("name"),
+            description: formData.get("description"),
+            leader_email: formData.get("leader_email")
         });
         ref.current?.reset();
-        if (r?.error) {
-            setError(r.error);
-            return;
-        } else {
-            return router.push("/login");
-        }
+
+        console.log("Created the team");
+        
+        // if (r?.error) {
+        //     setError(r.error);
+        //     return;
+        // } else {
+        //     return router.push("/login");
+        // }
     };
 
     return (
@@ -32,9 +43,9 @@ export default function Register() {
                 className="p-6 w-full max-w-[400px] flex flex-col justify-between items-center gap-2 
             border border-solid border-black bg-white rounded">
                 {error && <div className="">{error}</div>}
-                <h1 className="mb-5 w-full text-2xl font-bold">Register</h1>
+                <h1 className="mb-5 w-full text-2xl font-bold">Create team</h1>
 
-                <label className="w-full text-sm">Full Name</label>
+                <label className="w-full text-sm">Team name</label>
                 <input
                     type="text"
                     placeholder="Full Name"
@@ -42,33 +53,20 @@ export default function Register() {
                     name="name"
                 />
 
-                <label className="w-full text-sm">Email</label>
+                <label className="w-full text-sm">Team description</label>
                 <input
-                    type="email"
+                    type="text"
                     placeholder="Email"
                     className="w-full h-8 border border-solid border-black py-1 px-2.5 rounded"
-                    name="email"
+                    name="description"
                 />
 
-                <label className="w-full text-sm">Password</label>
-                <div className="flex w-full">
-                    <input
-                        type="password"
-                        placeholder="Password"
-                        className="w-full h-8 border border-solid border-black py-1 px-2.5 rounded"
-                        name="password"
-                    />
-                </div>
+               
 
                 <button className="w-full border border-solid border-black py-1.5 mt-2.5 rounded
             transition duration-150 ease hover:bg-black">
-                    Sign up
+                    Create
                 </button>
-
-
-                <Link href="/login" className="text-sm text-[#888] transition duration-150 ease hover:text-black">
-                    Already have an account?
-                </Link>
             </form>
         </section>
     )

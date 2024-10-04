@@ -7,43 +7,24 @@ export default function Home() {
   const { status } = useSession();
   const router = useRouter();
 
-  console.log(status);
-  
-
-  const showSession = () => {
-    if (status === "authenticated") {
-      return (
-        <button
-          className="border border-solid border-black rounded"
-          onClick={() => {
-            signOut({ redirect: false }).then(() => {
-              router.push("/");
-            });
-
-          }}
-        >
-          Sign Out
-        </button>
-      )
-    } else if (status === "loading") {
-      return (
-        <span className="text-[#888] text-sm mt-7">Loading...</span>
-      )
-    } else {
-      return (
-        <Link
-          href="/login"
-          className="border border-solid border-black rounded"
-        >
-          Sign In
-        </Link>
-      )
-    }
-  }
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center">
-      <h1 className="text-xl">Home</h1>
-      {showSession()}
+    <main className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-r from-[#0d1b2a] to-[#1b263b] text-white">
+      <div className="text-center">
+        <h1 className="text-5xl font-bold font-roboto mb-2">
+          Start making teamwork
+          <br />
+          more FUN
+        </h1>
+        <h2 className="text-2xl font-roboto mb-8">
+          Teamify is a simple and fun
+          platform to gamify<br /> your teamwork experience
+        </h2>
+        <Link href="/register">
+          <button className="bg-blue-500 text-white py-2 px-4 rounded shadow-lg hover:bg-blue-600 transition">
+            Get Started
+          </button>
+        </Link>
+      </div>
     </main>
   );
 }

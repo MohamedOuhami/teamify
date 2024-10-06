@@ -13,7 +13,7 @@ export const createTeam = async (values:any) => {
 
         if(userFound){
             const team = new Team({
-                name,description,leader:userFound._id,members:[userFound._id]
+                name,description,leader:userFound._id.toString(),members:[userFound._id.toString()]
             })
 
             const savedTeam = await team.save()

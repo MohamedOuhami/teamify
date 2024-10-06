@@ -1,12 +1,13 @@
+import { ObjectId } from "mongodb";
 import { UserDocument } from "./User"
 import mongoose from "mongoose"
 import { model, Schema } from "mongoose"
 
 export interface TeamDocument {
-    _id: string,
+    _id: string | ObjectId,
     name: string,
     description: string,
-    members: string[]; // Change to ObjectId[]
+    members: string[];
     leader: string,
     createdAt: Date
 }

@@ -53,7 +53,7 @@ const Navbar = () => {
                   <Link href="/login">Sign in</Link>
                 </Button>
                 <Button
-                  sx={{ bgcolor: "#fcbf49", ml: 1, fontSize: 12 }}
+                  sx={{ bgcolor: "#EF76FF", ml: 1, fontSize: 12 }}
                   variant="contained"
                 >
                   <Link href="/register">Start for free</Link>
@@ -73,7 +73,7 @@ const Navbar = () => {
                       width: 40, // Circle diameter
                       height: 40, // Circle diameter
                       borderRadius: "50%", // Makes it a circle
-                      backgroundColor: "#fcbf49", // Background color of the circle
+                      backgroundColor: "#EF76FF", // Background color of the circle
                       color: "#fff", // Text color inside the circle
                       fontFamily: "Roboto",
                       fontSize: "18px",

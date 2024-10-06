@@ -48,7 +48,7 @@ export default function CreateTeam() {
                 <label className="w-full text-sm">Team name</label>
                 <input
                     type="text"
-                    placeholder="Full Name"
+                    placeholder="Team name"
                     className="w-full h-8 border border-solid border-black py-1 px-2.5 rounded text-[13px]"
                     name="name"
                 />
@@ -56,7 +56,7 @@ export default function CreateTeam() {
                 <label className="w-full text-sm">Team description</label>
                 <input
                     type="text"
-                    placeholder="Email"
+                    placeholder="Description"
                     className="w-full h-8 border border-solid border-black py-1 px-2.5 rounded"
                     name="description"
                 />

@@ -15,12 +15,8 @@ const Page = () => {
             if (session?.user?.email) {
                 try {
                     const fetchedTeams = await getTeamByLeader(session?.user?.email);
-
-                    // Ensure fetchedTeams is always an array
                     setTeams(Array.isArray(fetchedTeams) ? fetchedTeams : []);
-
                     console.log("These are the fetched teams", fetchedTeams); // Check structure
-
                 } catch (error) {
                     console.error("Error fetching teams:", error);
                 } finally {
@@ -39,19 +35,22 @@ const Page = () => {
     }
 
     return (
-        <div>
-            {teams.length > 0 ? (
-                teams.map((team) => (
-                    <>
-                        <div key={team._id || team.id || Math.random()}>
-                            <TeamCard team_id={team._id} team_name={team.name || "Unnamed Team"} team_description={team.description || "No description available"} />
+        <div className="flex flex-col items-start justify-start min-h-screen p-4">
+            <div className="flex flex-wrap justify-start gap-4 w-full">
+                {teams.length > 0 ? (
+                    teams.map((team) => (
+                        <div key={Math.random()} className="w-1/3"> {/* Fixed to 1/3 width for all screens */}
+                            <TeamCard 
+                                team_id={team._id.toString()} 
+                                team_name={team.name || "Unnamed Team"} 
+                                team_description={team.description || "No description available"} 
+                            />
                         </div>
-                    </>
-
-                ))
-            ) : (
-                <p>No teams found</p>
-            )}
+                    ))
+                ) : (
+                    <p>No teams found</p>
+                )}
+            </div>
         </div>
     );
 };
